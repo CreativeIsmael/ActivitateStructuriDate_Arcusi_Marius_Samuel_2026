@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-struct Avion{
+struct Avion {
 	int id;
 	char* producator;
 	char* model;
@@ -15,7 +15,7 @@ struct Avion{
 
 //Initializare structura Avion
 
-struct Avion initializare(int id, const char* producator, const char* model, int capacitate, unsigned int autonomie, int viteza, float pret) 
+struct Avion initializare(int id, const char* producator, const char* model, int capacitate, unsigned int autonomie, int viteza, float pret)
 {
 	struct Avion a;
 	a.id = id;
@@ -35,7 +35,7 @@ struct Avion initializare(int id, const char* producator, const char* model, int
 
 void afisare(struct Avion a) {
 	printf("%d: Avionul produs de %s , modelul %s avand capacitatea maxima de %d, autonomie de %u si care atinge viteza maxima de %d valoareaza aproximativ %.2f milioane USD\n"
-		,a.id, a.producator, a.model, a.capacitateMaxima, a.autonomie, a.vitezaCroaziera, a.pret);
+		, a.id, a.producator, a.model, a.capacitateMaxima, a.autonomie, a.vitezaCroaziera, a.pret);
 }
 
 void modificaPret(struct Avion* a, float pret) {
@@ -44,16 +44,16 @@ void modificaPret(struct Avion* a, float pret) {
 	}
 }
 
-void dezaloq(struct Avion* a) {
-	if (a->producator != NULL) {
-		free(a->producator);
-		a->producator = NULL;
-	}
-	if (a->model != NULL) {
-		free(a->model);
-		a->model = NULL;
-	}
-}
+//void dezaloq(struct Avion* a) {
+//	if (a->producator != NULL) {
+//		free(a->producator);
+//		a->producator = NULL;
+//	}
+//	if (a->model != NULL) {
+//		free(a->model);
+//		a->model = NULL;
+//	}
+//}
 
 //Functii Vector Avioane
 
@@ -67,21 +67,42 @@ void afisareVector(struct Avion* vector, int nrElemente) {
 
 }
 
-struct Avion* copiazaPrimeleNElemente(struct Avion* a, int nrElemente, int nrElementeCopiate) {
-
-	struct Avion* newAvioane = NULL;
-	newAvioane = (struct Avion*)malloc(sizeof(struct Avion) * nrElementeCopiate);
-	for (int i = 0; i < nrElementeCopiate; i++) {
-
-		newAvioane[i] = a[i];
-		newAvioane[i].producator = (char*)malloc(sizeof(char) * (strlen(a[i].producator)) + 1);
-		strcpy_s(newAvioane[i].producator, strlen(a[i].producator) + 1, a[i].producator);
-		newAvioane[i].model = (char*)malloc(sizeof(char) * (strlen(a[i].model)) + 1);
-		strcpy_s(newAvioane[i].model, strlen(a[i].model) + 1, a[i].model);
-
+void dezaloq(struct Avion** avioane, int* nrAvioane) {
+	for (int i = 0; i < (*nrAvioane); i++) {
+		if ((*avioane)[i].producator != NULL){
+			free((*avioane)[i].producator);
+		}
+		if ((*avioane)[i].model != NULL) {
+			free((*avioane)[i].model);
+		}
 	}
+	free(*avioane);
+	*avioane = NULL;
+	*nrAvioane = 0;
 
-	return newAvioane;
+
+}
+
+struct Avion* copiazaPrimeleNElemente(struct Avion* a, int nrAvioane, int nrElementeCopiate) {
+
+		if (nrElementeCopiate > nrAvioane) {
+			nrElementeCopiate = nrAvioane;
+		}
+
+		struct Avion* newAvioane = NULL;
+		newAvioane = (struct Avion*)malloc(sizeof(struct Avion) * nrElementeCopiate);
+		for (int i = 0; i < nrElementeCopiate; i++) {
+
+			newAvioane[i] = a[i];
+			newAvioane[i].producator = (char*)malloc(sizeof(char) * (strlen(a[i].producator) + 1));
+			strcpy_s(newAvioane[i].producator, strlen(a[i].producator) + 1, a[i].producator);
+			newAvioane[i].model = (char*)malloc(sizeof(char) * (strlen(a[i].model) + 1));
+			strcpy_s(newAvioane[i].model, strlen(a[i].model) + 1, a[i].model);
+
+		}
+
+		return newAvioane;
+	
 
 }
 
@@ -135,7 +156,7 @@ int main() {
 	primeleAvioane = copiazaPrimeleNElemente(avioane, nrAvioane, nrPrimeAvioane);
 	afisareVector(primeleAvioane, nrPrimeAvioane);
 
-
-
+	dezaloq(&avioane, &nrAvioane);
+	dezaloq(&primeleAvioane, &nrPrimeAvioane);
 	return 0;
 }
