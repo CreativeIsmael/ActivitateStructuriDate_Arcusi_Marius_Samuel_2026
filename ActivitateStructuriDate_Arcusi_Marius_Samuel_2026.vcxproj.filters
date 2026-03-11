@@ -21,7 +21,7 @@
     <ClCompile Include="inlantuiresdd01.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="testAres.c">
+    <ClCompile Include="TemaSDD.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -126,7 +126,7 @@
   <ItemGroup>
     <ClCompile Include="inlantuiresdd01.c" />
     <ClCompile Include="sdd01..c" />
-    <ClCompile Include="testAres.c" />
+    <ClCompile Include="TemaSDD.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
