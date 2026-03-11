@@ -13,6 +13,8 @@ struct Avion{
 	float pret;
 };
 
+//Initializare structura Avion
+
 struct Avion initializare(int id, const char* producator, const char* model, int capacitate, unsigned int autonomie, int viteza, float pret) 
 {
 	struct Avion a;
@@ -28,6 +30,8 @@ struct Avion initializare(int id, const char* producator, const char* model, int
 
 	return a;
 }
+
+//Functii Structura Avion
 
 void afisare(struct Avion a) {
 	printf("%d: Avionul produs de %s , modelul %s avand capacitatea maxima de %d, autonomie de %u si care atinge viteza maxima de %d valoareaza aproximativ %.2f milioane USD\n"
@@ -51,16 +55,87 @@ void dezaloq(struct Avion* a) {
 	}
 }
 
+//Functii Vector Avioane
+
+void afisareVector(struct Avion* vector, int nrElemente) {
+
+	for (int i = 0; i < nrElemente; i++) {
+
+		afisare(vector[i]);
+
+	}
+
+}
+
+struct Avion* copiazaPrimeleNElemente(struct Avion* a, int nrElemente, int nrElementeCopiate) {
+
+	struct Avion* newAvioane = NULL;
+	newAvioane = (struct Avion*)malloc(sizeof(struct Avion) * nrElementeCopiate);
+	for (int i = 0; i < nrElementeCopiate; i++) {
+
+		newAvioane[i] = a[i];
+		newAvioane[i].producator = (char*)malloc(sizeof(char) * (strlen(a[i].producator)) + 1);
+		strcpy_s(newAvioane[i].producator, strlen(a[i].producator) + 1, a[i].producator);
+		newAvioane[i].model = (char*)malloc(sizeof(char) * (strlen(a[i].model)) + 1);
+		strcpy_s(newAvioane[i].model, strlen(a[i].model) + 1, a[i].model);
+
+	}
+
+	return newAvioane;
+
+}
+
+
+
 
 int main() {
 
-	struct Avion a;
-	a = initializare(1, "Airbus", "A320", 180, 6150, 858, 101.5);
+	struct Avion a0,a1,a2,a3,a4,a5,a6,a7,a8,a9;
+	a0 = initializare(1, "Airbus", "A320", 180, 6150, 858, 101.5);
+	a1 = initializare(2, "Boeing", "737", 210, 6570, 840, 121.05);
+	a2 = initializare(3, "Airbus", "A321", 220, 7400, 870, 129.25);
+	a3 = initializare(4, "Boeing", "787", 330, 14100, 900, 292.03);
+	a4 = initializare(5, "Airbus", "A330", 300, 11750, 861, 264.75);
+	a5 = initializare(6, "Boeing", "777", 396, 14800, 905, 375.5);
+	a6 = initializare(7, "Airbus", "A350", 350, 15000, 898, 317.7);
+	a7 = initializare(8, "Airbus", "A380", 850, 15000, 889, 445.5);
+	a8 = initializare(9, "Boeing", "747", 467, 13800, 917, 418);
+	a9 = initializare(10, "Embraer", "E195", 146, 4800, 870, 60);
 
-	afisare(a);
-	modificaPret(&a, 123.32);
-	afisare(a);
-	dezaloq(&a);
+
+	int nrAvioane = 10;
+	struct Avion* avioane = NULL;
+	avioane = (struct Avion*)malloc(sizeof(struct Avion) * nrAvioane);
+	avioane[0] = a0;
+	avioane[1] = a1;
+	avioane[2] = a2;
+	avioane[3] = a3;
+	avioane[4] = a4;
+	avioane[5] = a5;
+	avioane[6] = a6;
+	avioane[7] = a7;
+	avioane[8] = a8;
+	avioane[9] = a9;
+
+
+
+	//Testare
+
+	/*afisare(a0);
+	modificaPret(&a0, 123.32);
+	afisare(a0);
+	dezaloq(&a0);*/
+
+
+	/*afisareVector(avioane, nrAvioane);*/
+
+	struct Avion* primeleAvioane = NULL;
+	int nrPrimeAvioane = 5;
+
+	primeleAvioane = copiazaPrimeleNElemente(avioane, nrAvioane, nrPrimeAvioane);
+	afisareVector(primeleAvioane, nrPrimeAvioane);
+
+
 
 	return 0;
 }
