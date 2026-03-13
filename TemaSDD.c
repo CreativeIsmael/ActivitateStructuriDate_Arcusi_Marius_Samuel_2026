@@ -36,6 +36,7 @@ struct Avion initializare(int id, const char* producator, const char* model, int
 void afisare(struct Avion a) {
 	printf("%d: Avionul produs de %s , modelul %s avand capacitatea maxima de %d, autonomie de %u si care atinge viteza maxima de %d valoareaza aproximativ %.2f milioane USD\n"
 		, a.id, a.producator, a.model, a.capacitateMaxima, a.autonomie, a.vitezaCroaziera, a.pret);
+	
 }
 
 void modificaPret(struct Avion* a, float pret) {
@@ -44,16 +45,16 @@ void modificaPret(struct Avion* a, float pret) {
 	}
 }
 
-//void dezaloq(struct Avion* a) {
-//	if (a->producator != NULL) {
-//		free(a->producator);
-//		a->producator = NULL;
-//	}
-//	if (a->model != NULL) {
-//		free(a->model);
-//		a->model = NULL;
-//	}
-//}
+void dezaloque(struct Avion* a) {
+	if (a->producator != NULL) {
+		free(a->producator);
+		a->producator = NULL;
+	}
+	if (a->model != NULL) {
+		free(a->model);
+		a->model = NULL;
+	}
+}
 
 //Functii Vector Avioane
 
@@ -64,7 +65,7 @@ void afisareVector(struct Avion* vector, int nrElemente) {
 		afisare(vector[i]);
 
 	}
-
+	printf("\n");
 }
 
 void dezaloq(struct Avion** avioane, int* nrAvioane) {
@@ -106,6 +107,55 @@ struct Avion* copiazaPrimeleNElemente(struct Avion* a, int nrAvioane, int nrElem
 
 }
 
+void copiazaAvioaneScumpe(struct Avion* a, int nrElemente, float pretMinim, struct Avion** aNew, int* dimensiune) {
+
+	*dimensiune = 0;
+	for (int i = 0; i < nrElemente; i++) {
+		if (a[i].pret >= pretMinim) {
+			(*dimensiune)++;
+		}
+	}
+	if ((*aNew) != NULL) {
+		free(*aNew);
+	}
+	*aNew = (struct Avion*)malloc(sizeof(struct Avion) * (*dimensiune));
+	int k = 0;
+	for (int i = 0; i < nrElemente; i++) {
+		if (a[i].pret >= pretMinim) {
+			(*aNew)[k] = a[i];
+			(*aNew)[k].producator = (char*)malloc(sizeof(char) * (strlen(a[i].producator) + 1));
+			strcpy_s((*aNew)[k].producator, strlen(a[i].producator) + 1, a[i].producator);
+			(*aNew)[k].model = (char*)malloc(sizeof(char) * (strlen(a[i].model) + 1));
+			strcpy_s((*aNew)[k].model, strlen(a[i].model) + 1, a[i].model);
+			k++;
+		}
+
+
+
+	}
+
+
+
+}
+
+struct Avion getPrimulAvionByProducator(struct Avion* avioane, int nrAvioane, const char* producator) {
+
+	struct Avion a;
+	a.producator = NULL;
+	a.model = NULL;
+	for (int i = 0; i < nrAvioane; i++) {
+		if (strcmp(avioane[i].producator, producator) == 0) {
+			a = avioane[i];
+			a.producator = (char*)malloc(sizeof(char) * (strlen(avioane[i].producator) + 1));
+			strcpy_s(a.producator, strlen(avioane[i].producator) + 1, avioane[i].producator);
+			a.model = (char*)malloc(sizeof(char) * (strlen(avioane[i].model) + 1));
+			strcpy_s(a.model, strlen(avioane[i].model) + 1, avioane[i].model);
+			return a;
+		}
+	}
+	return a;
+
+}
 
 
 
@@ -140,7 +190,7 @@ int main() {
 
 
 
-	//Testare
+	//TESTARE
 
 	/*afisare(a0);
 	modificaPret(&a0, 123.32);
@@ -156,7 +206,27 @@ int main() {
 	primeleAvioane = copiazaPrimeleNElemente(avioane, nrAvioane, nrPrimeAvioane);
 	afisareVector(primeleAvioane, nrPrimeAvioane);
 
+	
+	//Testare copiazaAvioaneScumpe()
+
+	printf("TOP CELE MAI SCUMPE AVIOANE: \n\n");
+	struct Avion* avioaneScumpe = NULL;
+	int nrAvioaneScumpe = 0;
+	copiazaAvioaneScumpe(avioane, nrAvioane, 200, &avioaneScumpe, &nrAvioaneScumpe);
+	afisareVector(avioaneScumpe, nrAvioaneScumpe);
+
+	//Testare getPrimulAvionByProducator()
+
+	printf("PRIMUL AVION DUPA PRODUCATOR: \n\n");
+	struct Avion avionByProd = getPrimulAvionByProducator(avioane, nrAvioane, "Boeing");
+	afisare(avionByProd);
+
+	//Dezaloque
+
 	dezaloq(&avioane, &nrAvioane);
 	dezaloq(&primeleAvioane, &nrPrimeAvioane);
+	dezaloq(&avioaneScumpe, &nrAvioaneScumpe);
+	dezaloque(&avionByProd);
+
 	return 0;
 }
