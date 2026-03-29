@@ -27,5 +27,8 @@
     <ClCompile Include="TemaSDD01.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TemaSDD02.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
