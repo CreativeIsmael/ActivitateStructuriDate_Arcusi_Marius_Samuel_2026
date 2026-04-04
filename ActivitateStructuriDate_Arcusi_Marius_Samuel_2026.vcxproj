@@ -129,6 +129,7 @@
     <ClCompile Include="TemaSDD00.c" />
     <ClCompile Include="TemaSDD01.c" />
     <ClCompile Include="TemaSDD02.c" />
+    <ClCompile Include="TemaSDD03.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
