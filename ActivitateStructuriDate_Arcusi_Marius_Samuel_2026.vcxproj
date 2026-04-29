@@ -132,6 +132,10 @@
     <ClCompile Include="TemaSDD03.c" />
     <ClCompile Include="TemaSDD04.c" />
     <ClCompile Include="TemaSDD05.c" />
+    <ClCompile Include="TemaSDD06.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="muchii.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
