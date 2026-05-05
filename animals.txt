@@ -1,0 +1,10 @@
+1,Ghepard,120,72,carnivor,savana,12
+2,Leu,80,190,carnivor,savana,14
+3,Cal,88,500,ierbivor,campie,25
+4,Lup,60,45,carnivor,padure,13
+5,Urs brun,56,350,omnivor,padure,25
+6,Elefant,40,6000,ierbivor,savana,60
+7,Iepure,72,2,ierbivor,campie,9
+8,Hiena,65,60,carnivor,savana,20
+9,Antilopa,98,70,ierbivor,savana,15
+10,Zebra,65,300,ierbivor,savana,25

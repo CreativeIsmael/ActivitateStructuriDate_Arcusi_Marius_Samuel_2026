@@ -124,6 +124,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Animal0.c" />
     <ClCompile Include="inlantuiresdd01.c" />
     <ClCompile Include="sdd01..c" />
     <ClCompile Include="TemaSDD00.c" />
