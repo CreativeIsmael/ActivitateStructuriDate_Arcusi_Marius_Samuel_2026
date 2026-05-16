@@ -1,0 +1,10 @@
+1,Bucuresti,1883425,Ilfov,350.5
+2,Ploiesti,180540,Prahova,25.3
+3,Brasov,253200,Brasov,30.1
+4,Craiova,269506,Dolj,22.8
+5,Constanta,283872,Constanta,28.4
+6,Cluj-Napoca,286598,Cluj,45.6
+7,Timisoara,250849,Timis,40.2
+8,Arad,145000,Arad,15.7
+9,Oradea,196367,Bihor,18.9
+10,Iasi,290422,Iasi,32.5

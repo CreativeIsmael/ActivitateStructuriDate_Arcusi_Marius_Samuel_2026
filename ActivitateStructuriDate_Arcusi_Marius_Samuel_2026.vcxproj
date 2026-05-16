@@ -134,6 +134,7 @@
     <ClCompile Include="TemaSDD04.c" />
     <ClCompile Include="TemaSDD05.c" />
     <ClCompile Include="TemaSDD06.c" />
+    <ClCompile Include="TemaSDD07.c" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="muchii.txt" />
