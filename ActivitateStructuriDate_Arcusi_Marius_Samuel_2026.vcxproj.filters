@@ -48,6 +48,9 @@
     <ClCompile Include="TemaSDD07.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TemaSDD08.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="muchii.txt" />
